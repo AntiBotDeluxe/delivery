@@ -1,0 +1,25 @@
+name: CI gradle build
+on:
+  push:
+    branches: 
+      - develop
+  pull_request:
+    branches: 
+      - develop
+jobs:
+  build:
+    name: Build the project on ubunutu-latest and execute tests if provided
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gradle Command
+        uses: eskatos/gradle-command-action@v1.3.2
+        with:
+          wrapper-directory: gradle/wrapper/gradle-wrapper.jar
+          gradle-executable: gradlew
+          gradle-version: 6.3
+          # Gradle command line arguments, see gradle --help
+          #arguments: 
+          # Whether caching wrapper installation is enabled or not, default to 'true'
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          dependencies-cache-key: true
