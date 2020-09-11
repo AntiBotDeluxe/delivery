@@ -30,7 +30,4 @@ jobs:
         gradle-version: 6.6.1
         wrapper-cache-enabled: true
         dependencies-cache-enabled: true
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+        arguments:  build
