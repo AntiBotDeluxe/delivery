@@ -13,4 +13,4 @@ jobs:
         java-version: 12
     - uses: eskatos/gradle-command-action@v1
       with:
-        arguments: build --warning-mode all
+        arguments: build
