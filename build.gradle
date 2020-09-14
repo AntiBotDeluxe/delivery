@@ -5,6 +5,7 @@ plugins {
 group 'de.antibotdeluxe'
 version '0.4.8'
 
+
 repositories {
     mavenCentral()
 }
@@ -23,6 +24,7 @@ dependencies {
 test {
     useJUnit()
     failFast(true)
+    setMaxParallelForks(14)
 }
 
 jar {

@@ -33,9 +33,11 @@ public class Utility {
      * Checks if the given port is available and suitable for running the application.
      * <p>
      * A suitable one has to be:<br>
-     * <code> - at least 4 digits long </code><br>
-     * <code> - at most 5 digits long </code><br>
-     * <code> - above +1.023 and below +65.535 </code>
+     * <ul>
+     *  <li><code>at least 4 digits long</code></li>
+     *  <li><code>at most 5 digits long</code></li>
+     *  <li><code>above +1.023 and below +65.535</code></li>
+     * </ul>
      * <p>
      * The port has to match all the criteria otherwise an {@link IllegalArgumentException} will be thrown.<br>
      * If the port is already bound a {@link PortAlreadyBoundException} will be thrown.
