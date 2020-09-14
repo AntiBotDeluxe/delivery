@@ -1,5 +1,5 @@
 # CI from https://github.com/ReactiveX/RxJava
-name: "Validate Gradle Wrapper"
+name: "Gradle Wrapper Validation"
 on: [push, pull_request]
 
 jobs:
