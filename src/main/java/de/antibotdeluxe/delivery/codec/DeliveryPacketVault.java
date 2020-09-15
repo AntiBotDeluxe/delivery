@@ -9,12 +9,12 @@ import java.util.ArrayList;
  *
  */
 @SuppressWarnings("unused")
-public class DeliveryPacketRegistry {
+public class DeliveryPacketVault {
 
     /**
      * List that holds every {@link DeliveryPacket} registered.
      */
-    private final ArrayList<Class<? extends DeliveryPacket>> registry = new ArrayList<>();
+    private final ArrayList<Class<? extends DeliveryPacket>> vault = new ArrayList<>();
 
     /**
      * Retrieve a specific {@link DeliveryPacket} id by it's class.
@@ -36,7 +36,7 @@ public class DeliveryPacketRegistry {
      */
     public int getPacketIdByClass(Class<? extends DeliveryPacket> clazz) {
 
-        return this.registry.indexOf(clazz);
+        return this.vault.indexOf(clazz);
     }
 
     /**
@@ -56,7 +56,7 @@ public class DeliveryPacketRegistry {
      *          {@link DeliveryPacket} which should be registered
      */
     public void addPacketClass(Class<? extends DeliveryPacket> param) {
-        this.registry.add(param);
+        this.vault.add(param);
     }
 
     /**
@@ -67,7 +67,7 @@ public class DeliveryPacketRegistry {
      * @return DeliveryPacket as {@link Class}
      */
     public Class<? extends DeliveryPacket> getPacket(int packetId) {
-        return this.registry.get(packetId);
+        return this.vault.get(packetId);
     }
 
 }

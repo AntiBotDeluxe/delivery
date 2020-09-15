@@ -1,4 +1,4 @@
-package de.antibotdeluxe.delivery.tests;
+package de.antibotdeluxe.delivery.tests.utility;
 
 import de.antibotdeluxe.delivery.misc.Utility;
 import de.antibotdeluxe.delivery.misc.exceptions.PortAlreadyBoundException;

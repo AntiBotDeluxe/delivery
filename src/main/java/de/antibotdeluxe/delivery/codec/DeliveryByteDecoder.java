@@ -16,10 +16,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class DeliveryByteDecoder extends ByteToMessageDecoder {
 
-    private final DeliveryPacketRegistry registry;
+    private final DeliveryPacketVault vault;
 
-    protected DeliveryByteDecoder(DeliveryPacketRegistry registry) {
-        this.registry = registry;
+    protected DeliveryByteDecoder(DeliveryPacketVault vault) {
+        this.vault = vault;
     }
 
     /**
@@ -37,9 +37,9 @@ public class DeliveryByteDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         int packetId = in.readInt();
-        Class<? extends DeliveryPacket> packetClass = this.registry.getPacket(packetId);
+        Class<? extends DeliveryPacket> packetClass = this.vault.getPacket(packetId);
         if (packetClass == null)
-            throw new NoSuchPacketException("The packet with the packet id couldn't be found {packetId: " + packetId + "}");
+            throw new NoSuchPacketException(packetId);
         DeliveryPacket packet = packetClass.getDeclaredConstructor().newInstance();
         packet.read(new DeliveryByteBuf(in));
         in.clear();

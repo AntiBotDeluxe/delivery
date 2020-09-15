@@ -15,10 +15,10 @@ import io.netty.handler.codec.MessageToByteEncoder;
 @SuppressWarnings("unused")
 public class DeliveryByteEncoder extends MessageToByteEncoder<DeliveryPacket> {
 
-    private final DeliveryPacketRegistry registry;
+    private final DeliveryPacketVault vault;
 
-    protected DeliveryByteEncoder(DeliveryPacketRegistry registry) {
-        this.registry = registry;
+    protected DeliveryByteEncoder(DeliveryPacketVault vault) {
+        this.vault = vault;
     }
 
     /**
@@ -35,7 +35,7 @@ public class DeliveryByteEncoder extends MessageToByteEncoder<DeliveryPacket> {
      */
     @Override
     protected void encode(ChannelHandlerContext ctx, DeliveryPacket msg, ByteBuf out) {
-        int packetId = this.registry.getPacketId(msg);
+        int packetId = this.vault.getPacketId(msg);
         out.writeInt(packetId);
         msg.write(new DeliveryByteBuf(out));
     }
