@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -22,6 +23,10 @@ public class Utility {
      * Default symbol for separating and joining mainly {@link String}'s apart and together.
      */
     public static final String DEFAULT_DELIMITER = "::";
+
+    public static final Random RANDOM = new Random();
+
+    static final char[] DEFAULT_CHARS = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234556789".toCharArray();
 
     /**
      * Private constructor against code smell.
@@ -116,6 +121,14 @@ public class Utility {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, compressed.split(DEFAULT_DELIMITER));
         return list;
+    }
+
+    public static String generateUniqueIdentifier(int length) {
+        StringBuilder builder = new StringBuilder();
+        while (builder.length() != length) {
+            builder.append(DEFAULT_CHARS[RANDOM.nextInt(DEFAULT_CHARS.length)]);
+        }
+        return builder.toString();
     }
 
 }
