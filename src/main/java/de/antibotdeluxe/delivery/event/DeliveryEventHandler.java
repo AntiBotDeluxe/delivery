@@ -1,6 +1,7 @@
 package de.antibotdeluxe.delivery.event;
 
 import de.antibotdeluxe.delivery.codec.DeliveryPacket;
+import de.antibotdeluxe.delivery.misc.Utility;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -37,7 +38,7 @@ public abstract class DeliveryEventHandler {
     private final String identifier;
 
     public DeliveryEventHandler() {
-        this("n/A");
+        this("Handler-" + Utility.generateUniqueIdentifier(5));
     }
 
     public DeliveryEventHandler(String identifier) {
