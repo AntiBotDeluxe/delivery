@@ -1,12 +1,16 @@
 package de.antibotdeluxe.delivery.misc.exceptions;
 
+import de.antibotdeluxe.delivery.codec.DeliveryPacketVault;
+
 /**
  * Exception will be thrown if a specific {@link de.antibotdeluxe.delivery.codec.DeliveryPacket} id was not found int the
- * {@link de.antibotdeluxe.delivery.codec.DeliveryPacketRegistry }<br>
+ * {@link DeliveryPacketVault }<br>
  * The {@link NoSuchPacketException} is just a regular {@link RuntimeException} with just a
  * different name to make it easier to catch it or recognize the error by just looking at the name
  * of it.<br>
- * There is no special functionality added to this exception.
+ * <p>
+ * <strong>Notice</strong><br>
+ * The message is already filled in and only the packetId will be passed.
  *
  * @author jhz
  */
@@ -16,11 +20,11 @@ public class NoSuchPacketException extends RuntimeException {
     /**
      * Constructor takes the message to the super class which is then displayed.
      *
-     * @param msg
-     *          Message which should be printed if the exception is fired
+     * @param packetId
+     *          PacketId which was not found in the {@link DeliveryPacketVault}
      */
-    public NoSuchPacketException(String msg) {
-        super(msg);
+    public NoSuchPacketException(int packetId) {
+        super("The packet with the packet id couldn't be found {packetId: " + packetId + "}");
     }
 
 }

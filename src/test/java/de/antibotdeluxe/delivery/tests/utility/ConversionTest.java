@@ -1,4 +1,4 @@
-package de.antibotdeluxe.delivery.tests;
+package de.antibotdeluxe.delivery.tests.utility;
 
 import de.antibotdeluxe.delivery.misc.Utility;
 import org.junit.After;
@@ -15,6 +15,7 @@ import java.util.List;
  *
  * @author jhz
  */
+
 public class ConversionTest {
 
     private List<String> list;
