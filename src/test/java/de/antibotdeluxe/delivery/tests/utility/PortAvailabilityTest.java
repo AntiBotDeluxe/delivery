@@ -32,7 +32,7 @@ public class PortAvailabilityTest {
     }
 
     /**
-     * Closing the test environment.
+     * Cleaning up the test environment.
      *
      * @throws Exception {@link IOException} from {@link ServerSocket}
      */
@@ -52,7 +52,7 @@ public class PortAvailabilityTest {
      * <code> - above +1.023 and below +65.535 </code>
      */
     @Test
-    public void checkPortAvailabilityTest() {
+    public void testPortAvailabilityTest() {
         System.out.println("[Test] Running PortAvailabilityTest..");
         try {
             Utility.checkPortAvailability(-1);

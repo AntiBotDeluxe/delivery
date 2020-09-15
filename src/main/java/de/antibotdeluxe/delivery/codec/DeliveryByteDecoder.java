@@ -18,7 +18,7 @@ public class DeliveryByteDecoder extends ByteToMessageDecoder {
 
     private final DeliveryPacketVault vault;
 
-    protected DeliveryByteDecoder(DeliveryPacketVault vault) {
+    public DeliveryByteDecoder(DeliveryPacketVault vault) {
         this.vault = vault;
     }
 

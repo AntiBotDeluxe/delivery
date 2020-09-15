@@ -10,7 +10,7 @@ package de.antibotdeluxe.delivery.misc.exceptions;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class IdentifierAlreadyBoundException extends RuntimeException {
 
     /**

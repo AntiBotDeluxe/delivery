@@ -3,8 +3,8 @@ package de.antibotdeluxe.delivery.tests.event;
 import de.antibotdeluxe.delivery.codec.DeliveryPacket;
 import de.antibotdeluxe.delivery.event.DeliveryEventHandler;
 import de.antibotdeluxe.delivery.event.DeliveryEventManager;
-import de.antibotdeluxe.delivery.tests.event.packets.JaneDoePacket;
-import de.antibotdeluxe.delivery.tests.event.packets.LisaEmberPacket;
+import de.antibotdeluxe.delivery.tests.packets.TestJaneDoePacket;
+import de.antibotdeluxe.delivery.tests.packets.TestLisaEmberPacket;
 import io.netty.channel.ChannelHandlerContext;
 import org.junit.After;
 import org.junit.Assert;
@@ -17,7 +17,7 @@ import org.junit.Test;
  * @author jhz
  */
 
-public class EventTest {
+public class EventFunctionalityTest {
 
     private DeliveryEventManager eventManager;
     private String resultOne;
@@ -34,28 +34,28 @@ public class EventTest {
         eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-001]") {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
-                JaneDoePacket packet = (JaneDoePacket) typeOf;
+                TestJaneDoePacket packet = (TestJaneDoePacket) typeOf;
                 resultOne = packet.sayName();
                 System.out.println("[Test] TestHandler-001 fired");
             }
 
             @Override
             public Class<? extends DeliveryPacket> getPacketCapture() {
-                return JaneDoePacket.class;
+                return TestJaneDoePacket.class;
             }
         });
 
         eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-002]") {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
-                LisaEmberPacket packet = (LisaEmberPacket) typeOf;
+                TestLisaEmberPacket packet = (TestLisaEmberPacket) typeOf;
                 resultTwo = packet.sayName();
                 System.out.println("[Test] TestHandler-002 fired");
             }
 
             @Override
             public Class<? extends DeliveryPacket> getPacketCapture() {
-                return LisaEmberPacket.class;
+                return TestLisaEmberPacket.class;
             }
         });
 
@@ -75,20 +75,20 @@ public class EventTest {
         eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-004]") {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
-                JaneDoePacket packet = (JaneDoePacket) typeOf;
+                TestJaneDoePacket packet = (TestJaneDoePacket) typeOf;
                 resultOne = packet.sayName();
                 System.out.println("[Test] TestHandler-004 fired");
             }
 
             @Override
             public Class<? extends DeliveryPacket> getPacketCapture() {
-                return JaneDoePacket.class;
+                return TestJaneDoePacket.class;
             }
         });
     }
 
     /**
-     * Closing the test environment.
+     * Cleaning up the test environment.
      */
     @After
     public void after() { }
@@ -99,8 +99,8 @@ public class EventTest {
     @Test
     public void checkEventSystemFunctionality() {
         System.out.println("[Test] Running EventTest..");
-        eventManager.callHandlers(new JaneDoePacket(), null);
-        eventManager.callHandlers(new LisaEmberPacket(), null);
+        eventManager.callHandlers(new TestJaneDoePacket(), null);
+        eventManager.callHandlers(new TestLisaEmberPacket(), null);
         Assert.assertEquals("The result was not 'Jane Doe'", "Jane Doe", resultOne);
         Assert.assertEquals("The result was not 'Lisa Ember'", "Lisa Ember", resultTwo);
         Assert.assertEquals("The result was not 'Global'", "Global", resultThree);

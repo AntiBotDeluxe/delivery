@@ -32,7 +32,7 @@ public class ConversionTest {
     }
 
     /**
-     * Closing the test environment.
+     * Cleaning up the test environment.
      */
     @After
     public void after() {
@@ -47,7 +47,7 @@ public class ConversionTest {
      * <code>convertStringToList(String compressed)</code>
      */
     @Test
-    public void checkStringListAndBackConversion() {
+    public void testStringListAndBackConversion() {
         System.out.println("[Test] Running ConversionTest..");
         Assert.assertEquals("The compressed String did not match the expected String.", "Lisa::is::a::beautiful::woman",
                 Utility.convertListToString(this.list));
