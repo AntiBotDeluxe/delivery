@@ -41,7 +41,7 @@ public class DeliveryClient {
      * Initialize the {@link DeliveryClient}
      *
      * @param vault
-     *          {@link DeliveryPacketVault where all {@link DeliveryPacket}'s are stored.
+     *          {@link DeliveryPacketVault} where all {@link DeliveryPacket}'s are stored.
      */
     public DeliveryClient(DeliveryPacketVault vault) {
         this.eventManager = new DeliveryEventManager();

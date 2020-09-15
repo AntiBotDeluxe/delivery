@@ -162,6 +162,8 @@ public class DeliveryByteBuf {
      *
      * @param param
      *          {@link List} which should be written to the {@link ByteBuf}
+     * @param <T>
+     *          Type of the {@link List}
      */
     public <T> void writeList(List<T> param) {
         this.writeString(Utility.convertListToString(param));
