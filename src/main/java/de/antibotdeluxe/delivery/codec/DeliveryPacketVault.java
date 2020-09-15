@@ -1,6 +1,7 @@
 package de.antibotdeluxe.delivery.codec;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Used from the Server and Client to get the {@link DeliveryPacket} id and parse them into the right {@link DeliveryPacket}.
@@ -17,7 +18,7 @@ public class DeliveryPacketVault {
     private final ArrayList<Class<? extends DeliveryPacket>> vault = new ArrayList<>();
 
     /**
-     * Retrieve a specific {@link DeliveryPacket} id by it's class.
+     * Retrieves a specific {@link DeliveryPacket} id by it's class.
      *
      * @param param
      *          {@link DeliveryPacket} which id should be retrieved
@@ -28,7 +29,7 @@ public class DeliveryPacketVault {
     }
 
     /**
-     * Retrieve a specific {@link DeliveryPacket} id by it's class.
+     * Retrieves a specific {@link DeliveryPacket} id by it's class.
      *
      * @param clazz
      *          {@link DeliveryPacket} which id should be retrieved
@@ -40,7 +41,7 @@ public class DeliveryPacketVault {
     }
 
     /**
-     * Will add the given {@link DeliveryPacket} as raw class object to the registry.
+     * Adds the given {@link DeliveryPacket} as raw class object to the vault.
      *
      * @param packet
      *          {@link DeliveryPacket} which should be registered
@@ -50,7 +51,19 @@ public class DeliveryPacketVault {
     }
 
     /**
-     * Will add the given {@link DeliveryPacket} as raw class object to the registry.
+     * Adds the given {@link DeliveryPacket}'s as raw class object to the vault.
+     *
+     * @param packet
+     *          {@link DeliveryPacket} which should be registered
+     */
+    public void addPackets(DeliveryPacket... packet) {
+        for (DeliveryPacket deliveryPacket : packet) {
+            this.addPacketClass(deliveryPacket.getClass());
+        }
+    }
+
+    /**
+     * Adds the given {@link DeliveryPacket} as raw class object to the vault.
      *
      * @param param
      *          {@link DeliveryPacket} which should be registered
@@ -60,7 +73,18 @@ public class DeliveryPacketVault {
     }
 
     /**
-     * Will return the {@link DeliveryPacket} {@link Class} object if the corresponding {@link DeliveryPacket} id was found.
+     * Adds the given {@link DeliveryPacket} as raw class object to the vault.
+     *
+     * @param classes
+     *          {@link DeliveryPacket} {@link Class}'s which should be registered
+     */
+    @SafeVarargs
+    public final void addPacketClasses(Class<? extends DeliveryPacket>... classes) {
+        Collections.addAll(this.vault, classes);
+    }
+
+    /**
+     * Returns the {@link DeliveryPacket} {@link Class} object if the corresponding {@link DeliveryPacket} id was found.
      *
      * @param packetId
      *          from the {@link DeliveryPacket}

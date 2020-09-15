@@ -17,7 +17,7 @@ public class DeliveryByteEncoder extends MessageToByteEncoder<DeliveryPacket> {
 
     private final DeliveryPacketVault vault;
 
-    protected DeliveryByteEncoder(DeliveryPacketVault vault) {
+    public DeliveryByteEncoder(DeliveryPacketVault vault) {
         this.vault = vault;
     }
 

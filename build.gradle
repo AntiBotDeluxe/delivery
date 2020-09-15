@@ -24,7 +24,6 @@ dependencies {
 test {
     useJUnit()
     failFast(true)
-    setMaxParallelForks(14)
 }
 
 jar {

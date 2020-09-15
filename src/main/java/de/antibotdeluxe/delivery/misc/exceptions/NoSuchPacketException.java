@@ -14,7 +14,7 @@ import de.antibotdeluxe.delivery.codec.DeliveryPacketVault;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class NoSuchPacketException extends RuntimeException {
 
     /**
