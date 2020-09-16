@@ -31,7 +31,7 @@ public class EventFunctionalityTest {
     public void before() {
         System.out.println("\n[Test] Initializing EventTest..");
         this.eventManager = new DeliveryEventManager();
-        eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-001]") {
+        eventManager.bindHandlers(new DeliveryEventHandler() {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
                 TestJaneDoePacket packet = (TestJaneDoePacket) typeOf;
@@ -45,7 +45,7 @@ public class EventFunctionalityTest {
             }
         });
 
-        eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-002]") {
+        eventManager.bindHandlers(new DeliveryEventHandler() {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
                 TestLisaEmberPacket packet = (TestLisaEmberPacket) typeOf;
@@ -59,7 +59,7 @@ public class EventFunctionalityTest {
             }
         });
 
-        eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-003]") {
+        eventManager.bindHandlers(new DeliveryEventHandler() {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
                 resultThree = "Global";
@@ -72,7 +72,7 @@ public class EventFunctionalityTest {
           }
         });
 
-        eventManager.bindHandlers(new DeliveryEventHandler("[TestHandler-004]") {
+        eventManager.bindHandlers(new DeliveryEventHandler() {
             @Override
             public void call(DeliveryPacket typeOf, ChannelHandlerContext ctx) {
                 TestJaneDoePacket packet = (TestJaneDoePacket) typeOf;

@@ -14,8 +14,8 @@ import java.util.HashMap;
 @SuppressWarnings("unused")
 public class DeliveryEventManager {
 
-    private final HashMap<Class<? extends DeliveryPacket>, DeliveryEventHandlerList> eventVault = new HashMap<>();
-    private final DeliveryEventHandlerList globalRegistry = new DeliveryEventHandlerList();
+    private final HashMap<Class<? extends DeliveryPacket>, DeliveryEventHandlerList> localEventVault = new HashMap<>();
+    private final DeliveryEventHandlerList globalEventVault = new DeliveryEventHandlerList();
 
     /**
      * Binds a new {@link DeliveryEventHandler} to the system.<br>
@@ -30,11 +30,11 @@ public class DeliveryEventManager {
     public void bindHandlers(DeliveryEventHandler handler) {
         Class<? extends DeliveryPacket> packetCapture = handler.getPacketCapture();
         if (packetCapture.equals(DeliveryPacket.class)) {
-            this.globalRegistry.addHandler(handler);
+            this.globalEventVault.addHandler(handler);
             return;
         }
-        this.eventVault.computeIfAbsent(packetCapture, k -> new DeliveryEventHandlerList());
-        this.eventVault.get(packetCapture).addHandler(handler);
+        this.localEventVault.computeIfAbsent(packetCapture, k -> new DeliveryEventHandlerList());
+        this.localEventVault.get(packetCapture).addHandler(handler);
     }
 
     /**
@@ -46,8 +46,8 @@ public class DeliveryEventManager {
      *          {@link ChannelHandlerContext} provided by <a target="_blank" href="http://netty.io">Netty.io</a>
      */
     public void callHandlers(DeliveryPacket packet, ChannelHandlerContext ctx) {
-        this.globalRegistry.callHandlers(packet, ctx);
-        this.eventVault.computeIfPresent(packet.getClass(), (k, v) -> {
+        this.globalEventVault.callHandlers(packet, ctx);
+        this.localEventVault.computeIfPresent(packet.getClass(), (k, v) -> {
             v.callHandlers(packet, ctx);
             return v;
         });

@@ -1,7 +1,7 @@
 package de.antibotdeluxe.delivery.event;
 
 import de.antibotdeluxe.delivery.codec.DeliveryPacket;
-import de.antibotdeluxe.delivery.misc.exceptions.IdentifierAlreadyBoundException;
+import de.antibotdeluxe.delivery.misc.exceptions.UUIDAlreadyBoundException;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.ArrayList;
@@ -33,13 +33,11 @@ public class DeliveryEventHandlerList {
      *          {@link DeliveryEventHandler} which should be added
      */
     void addHandler(DeliveryEventHandler handler) {
-        if (packetCapture == null)
-            packetCapture = handler.getPacketCapture();
+        if (packetCapture == null) packetCapture = handler.getPacketCapture();
 
-        for (DeliveryEventHandler storedHandler : this.handlers) {
-            if (storedHandler.getIdentifier().equals(handler.getIdentifier()))
-                throw new IdentifierAlreadyBoundException(handler.getIdentifier());
-        }
+        for (DeliveryEventHandler storedHandler : this.handlers)
+            if (storedHandler.getUuid().equals(handler.getUuid()))
+                throw new UUIDAlreadyBoundException(handler.getUuid());
         this.handlers.add(handler);
     }
 
@@ -52,8 +50,7 @@ public class DeliveryEventHandlerList {
      *          {@link ChannelHandlerContext} provided by <a target="_blank" href="http://netty.io">Netty.io</a>
      */
     void callHandlers(DeliveryPacket packet, ChannelHandlerContext context) {
-        for (DeliveryEventHandler listener : this.handlers)
-            listener.call(packet, context);
+        this.handlers.forEach(handler -> handler.call(packet, context));
     }
 
     /**

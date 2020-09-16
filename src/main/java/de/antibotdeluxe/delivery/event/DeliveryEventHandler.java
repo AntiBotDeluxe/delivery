@@ -1,8 +1,9 @@
 package de.antibotdeluxe.delivery.event;
 
 import de.antibotdeluxe.delivery.codec.DeliveryPacket;
-import de.antibotdeluxe.delivery.misc.Utility;
 import io.netty.channel.ChannelHandlerContext;
+
+import java.util.UUID;
 
 /**
  * Abstract class is used to store the runtime code which should be fired if a specific packet was detected in the
@@ -32,17 +33,17 @@ public abstract class DeliveryEventHandler {
     public abstract Class<? extends DeliveryPacket> getPacketCapture();
 
     /**
-     * The identifier is for giving each {@link DeliveryEventHandler} a unique name. If the identifier is empty it will be generated
-     * automatically.
+     * The {@link UUID} is for giving each {@link DeliveryEventHandler} a unique identifier. If the {@link UUID} is empty it will be
+     * generated automatically.
      */
-    private final String identifier;
+    private final UUID uuid;
 
     public DeliveryEventHandler() {
-        this("Handler-" + Utility.generateUniqueIdentifier(5));
+        this(UUID.randomUUID());
     }
 
-    public DeliveryEventHandler(String identifier) {
-        this.identifier = identifier;
+    public DeliveryEventHandler(UUID uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -50,8 +51,8 @@ public abstract class DeliveryEventHandler {
      *
      * @return Identifier of the {@link DeliveryEventHandler}
      */
-    public String getIdentifier() {
-        return this.identifier;
+    public UUID getUuid() {
+        return this.uuid;
     }
 
 }
