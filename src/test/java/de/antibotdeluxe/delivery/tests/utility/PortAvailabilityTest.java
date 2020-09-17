@@ -39,7 +39,7 @@ public class PortAvailabilityTest {
     @After
     public void after() throws Exception {
         System.out.println("[Test] Closing PortAvailabilityTest..\n");
-        if (!this.serverSocket.isClosed())
+        if (this.serverSocket != null)
             this.serverSocket.close();
     }
 
