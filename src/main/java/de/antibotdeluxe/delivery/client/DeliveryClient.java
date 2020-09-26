@@ -18,7 +18,13 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("unused")
+/**
+ * Will connect to any {@link de.antibotdeluxe.delivery.server.DeliveryServer} by using the
+ * <a target="_blank" href="http://netty.io">Netty.io</a> library.
+ *
+ * @author jhz
+ */
+
 public class DeliveryClient {
 
     static {

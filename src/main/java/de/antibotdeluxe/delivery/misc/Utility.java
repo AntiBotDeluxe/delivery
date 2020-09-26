@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class Utility {
 
     /**

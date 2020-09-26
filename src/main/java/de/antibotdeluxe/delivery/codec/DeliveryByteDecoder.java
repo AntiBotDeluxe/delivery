@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class DeliveryByteDecoder extends ByteToMessageDecoder {
 
     private final DeliveryPacketVault vault;

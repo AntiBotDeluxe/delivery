@@ -12,7 +12,7 @@ import io.netty.handler.codec.MessageToByteEncoder;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class DeliveryByteEncoder extends MessageToByteEncoder<DeliveryPacket> {
 
     private final DeliveryPacketVault vault;

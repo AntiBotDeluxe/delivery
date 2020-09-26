@@ -4,61 +4,36 @@ import de.antibotdeluxe.delivery.codec.DeliveryPacket;
 import de.antibotdeluxe.delivery.misc.exceptions.UUIDAlreadyBoundException;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Class is used to store all specific {@link DeliveryEventHandler}'s (further called handlers) and call them if specific
- * {@link DeliveryPacket} was detected in the {@link DeliveryEventManager}.
- *
- * @author jhz
- */
-@SuppressWarnings("unused")
 public class DeliveryEventHandlerList {
 
-    /**
-     * List containing all {@link DeliveryEventHandler}'s for a specific type of {@link DeliveryPacket}.
-     */
-    private final List<DeliveryEventHandler> handlers = new ArrayList<>();
+    private final Map<DeliveryEventPriority, List<DeliveryEventHandler>> storedHandlers = new EnumMap<>(DeliveryEventPriority.class);
 
-    /**
-     * Stores which type of {@link DeliveryPacket} is used in this {@link DeliveryEventHandlerList}.
-     */
-    private Class<? extends DeliveryPacket> packetCapture;
+    private Class<? extends DeliveryPacket> packetType;
 
-    /**
-     * Will add a new {@link DeliveryEventHandler} to the list.
-     *
-     * @param handler
-     *          {@link DeliveryEventHandler} which should be added
-     */
-    void addHandler(DeliveryEventHandler handler) {
-        if (packetCapture == null) packetCapture = handler.getPacketCapture();
+    public DeliveryEventHandlerList() {
+        this.storedHandlers.put(DeliveryEventPriority.LOW, new ArrayList<>());
+        this.storedHandlers.put(DeliveryEventPriority.MEDIUM, new ArrayList<>());
+        this.storedHandlers.put(DeliveryEventPriority.HIGH, new ArrayList<>());
+    }
 
-        for (DeliveryEventHandler storedHandler : this.handlers)
-            if (storedHandler.getUuid().equals(handler.getUuid()))
+    public void addHandler(DeliveryEventHandler handler) {
+        if (this.packetType == null) this.packetType = handler.getPacketType();
+        this.storedHandlers.values().forEach(v -> v.forEach(storedHandler -> {
+            if (storedHandler.equals(handler))
                 throw new UUIDAlreadyBoundException(handler.getUuid());
-        this.handlers.add(handler);
+        }));
+        this.storedHandlers.get(handler.getPriority()).add(handler);
     }
 
-    /**
-     * Executes the stored code in the {@link DeliveryEventHandler}.
-     *
-     * @param packet
-     *          {@link DeliveryPacket} which has the same type as the capture
-     * @param context
-     *          {@link ChannelHandlerContext} provided by <a target="_blank" href="http://netty.io">Netty.io</a>
-     */
-    void callHandlers(DeliveryPacket packet, ChannelHandlerContext context) {
-        this.handlers.forEach(handler -> handler.call(packet, context));
+    public void callHandlers(DeliveryPacket packet, ChannelHandlerContext ctx) {
+        this.storedHandlers.get(DeliveryEventPriority.HIGH).forEach(handler -> handler.call(packet, ctx));
+        this.storedHandlers.get(DeliveryEventPriority.MEDIUM).forEach(handler -> handler.call(packet, ctx));
+        this.storedHandlers.get(DeliveryEventPriority.LOW).forEach(handler -> handler.call(packet, ctx));
     }
 
-    /**
-     * Returns the actual capture of the {@link DeliveryPacket}.
-     *
-     * @return Class that extends {@link DeliveryPacket}
-     */
-    public Class<? extends DeliveryPacket> getPacketCapture() {
-        return this.packetCapture;
+    public Class<? extends DeliveryPacket> getPacketType() {
+        return this.packetType;
     }
 }

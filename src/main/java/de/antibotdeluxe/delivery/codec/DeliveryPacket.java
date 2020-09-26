@@ -10,7 +10,7 @@ package de.antibotdeluxe.delivery.codec;
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public interface DeliveryPacket {
 
     /**

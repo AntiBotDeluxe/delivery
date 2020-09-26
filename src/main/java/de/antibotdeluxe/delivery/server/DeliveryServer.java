@@ -24,11 +24,11 @@ import java.util.logging.Logger;
 
 /**
  * Class is the heart of the application.<br>
- * It boots up and initializes<a target="_blank" href="http://netty.io">Netty.io</a> so new connections can be accepted.
+ * It boots up and initializes <a target="_blank" href="http://netty.io">Netty.io</a> so new connections can be accepted.
  *
  * @author jhz
  */
-@SuppressWarnings("unused")
+
 public class DeliveryServer {
 
 
